@@ -20,10 +20,13 @@ const btn_submit = document.querySelector("form>button");
 const total = document.getElementById("total");
 
 
+
 btn_submit.addEventListener("click" , (event)=>{
   event.preventDefault();
   ajouter();
 })
+
+
 
 function afficher (){
   if(produits.length == 0){
@@ -34,7 +37,7 @@ function afficher (){
     etat_vide.style.display = "none" ;
     ul.textContent = "";
     let compteur = 0
-    produits.forEach(element => {
+    produits.forEach(element , index => {
          const li = document.createElement("li");
           ul.append(li);
           li.classList.add("produit");
@@ -59,6 +62,9 @@ function afficher (){
           btn.type = "button"; 
           compteur += Number(element.prix);
 
+          const btn_supprimer = document.getElementsByClassName("supprimer");
+          btn_supprimer.addEventListener("click" , ()=>{console.log("fgh")})
+
          
      });
      total.textContent = compteur;
@@ -68,7 +74,7 @@ function afficher (){
 afficher();
 
 function ajouter(){
-  if(nom_produit == "" || prix_produit == ""){
+  if(nom_produit.value == "" || prix_produit.value <= 0){
     return
   }  
   const objet = {
@@ -82,12 +88,18 @@ function ajouter(){
 
 function supprimer(id){
   let index_sup ;
-  produits.forEach(element,index => {
+  produits.forEach((element,index )=> {
     if(element.id == id){
         index_sup = index;
     }
   });
 
+  if(index_sup == undefined){
+    return
+  }
+
+  produits.splice(index_sup , 1);
+  afficher();
 
 }
 
