@@ -37,7 +37,7 @@ function afficher (){
     etat_vide.style.display = "none" ;
     ul.textContent = "";
     let compteur = 0
-    produits.forEach(element , index => {
+    produits.forEach((element , index) => {
          const li = document.createElement("li");
           ul.append(li);
           li.classList.add("produit");
@@ -62,8 +62,8 @@ function afficher (){
           btn.type = "button"; 
           compteur += Number(element.prix);
 
-          const btn_supprimer = document.getElementsByClassName("supprimer");
-          btn_supprimer.addEventListener("click" , ()=>{console.log("fgh")})
+          const btn_supprimer = document.getElementsByClassName("supprimer")[index];
+          btn_supprimer.addEventListener("click" , ()=>{supprimer(element.id)})
 
          
      });
